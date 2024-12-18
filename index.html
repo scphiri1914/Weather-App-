@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <!-- AOS Library -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f7f9;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #2c3e50;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo h2 {
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #e74c3c;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 5px 0;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #e74c3c;
+        }
+
+        .home, #current, footer {
+            padding: 2rem 10%;
+            text-align: center;
+        }
+
+        .search-box {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .search-box input {
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        .search-box button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #e74c3c;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-box button:hover {
+            background-color: #c0392b;
+        }
+
+        .weather-box, .info-box {
+            margin: 1rem 0;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        footer ul li a {
+            color: #2c3e50;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer ul li a:hover {
+            color: #e74c3c;
+        }
+
+        footer p {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header data-aos="fade-down">
+        <div class="logo"><a href="#"><h2>my<span>weather</span></h2></a></div>
+        <div class="burger" id="burger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <nav id="nav">
+            <a href="#home">Home</a>
+            <div class="to-five-day"><a href="forecast.html" id="fiveDayForecastLink">A Brief Outlook on the Coming Five Days</a></div>
+            <a href="#" id="toggle-temp">Convert to °F</a>
+        </nav>
+    </header>
+
+    <section id="home" class="home" data-aos="fade-up">
+        <h2>Stay Informed with the Latest Weather Updates</h2>
+        <p>Having up-to-date weather information at your fingertips is essential.</p>
+        <div class="search-box">
+            <input type="text" id="city" placeholder="Enter city name">
+            <button id="search">Search</button>
+        </div>
+    </section>
+
+    <section id="current" data-aos="fade-up">
+        <div class="weather-box" id="weather" data-aos="zoom-in">
+            <h3 data-aos="fade-right">Current Weather Info</h3>
+            <p data-aos="fade-left">Search for a city to get current weather updates or enable location for automatic updates.</p>
+        </div>
+
+        <div class="weather-info" id="additional-info">
+            <div class="info-box" data-aos="fade-up" data-aos-delay="200">
+                <i class="fas fa-wind"></i>
+                <p id="wind-speed">Wind Speed: -- m/s</p>
+            </div>
+            <div class="info-box" data-aos="fade-up" data-aos-delay="400">
+                <i class="fas fa-tint"></i>
+                <p id="humidity">Humidity: -- %</p>
+            </div>
+            <div class="info-box" data-aos="fade-up" data-aos-delay="600">
+                <i class="fas fa-sun"></i>
+                <p id="sunrise">Sunrise: --:--</p>
+            </div>
+            <div class="info-box" data-aos="fade-up" data-aos-delay="800">
+                <i class="fas fa-moon"></i>
+                <p id="sunset">Sunset: --:--</p>
+            </div>
+        </div>
+    </section>
+
+    <footer data-aos="fade-up">
+        <ul>
+            <li><a href="http://www.icuzambia.net">ICU Zambia</a></li>
+            <li><a href="http://www.zrdc.org">ZRDC</a></li>
+        </ul>
+        <p>&copy; 2024 Weather App. All rights reserved. Designed and maintained by Scotch J Phiri. SIN: 2312965380</p>
+    </footer>
+</div>
+
+<script src="https://kit.fontawesome.com/aed6434f35.js" crossorigin="anonymous"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
